@@ -1,0 +1,12 @@
+version: '3.9'
+services:
+  cameras:
+    build: 
+      context: .
+      args:
+        VITE_FRIGATE_API_URL: "http://192.168.178.69:3001/api/"
+        VITE_CAMERA_NAMES: "Garten,Eingang"
+        VITE_CAMERA_RES: "1520,1080"
+    ports:
+      - "8080:80"
+    restart: unless-stopped
