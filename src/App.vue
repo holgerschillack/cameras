@@ -1,7 +1,9 @@
 <template>
-  <div class="h-screen w-screen flex items-center justify-center overflow-hidden bg-slate-400">
+  <div
+    class="md:h-screen w-screen flex items-center justify-center overflow-scroll md:overflow-hidden bg-slate-400"
+  >
     <div class="p-6 grid sm:grid-cols-1 md:grid-cols-2 md:grid-rows-2 gap-4">
-      <div v-for="(camera, i) in cameras" :key="i" class="relative video-max sm:w-full">
+      <div v-for="(camera, i) in cameras" :key="i" class="relative video-max sm:w-full mb-6">
         <p class="text-3xl font-semibold text-gray-900">{{ camera.name }}</p>
         <VideoStream
           v-if="camera.playing"
