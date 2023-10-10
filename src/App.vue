@@ -10,6 +10,7 @@
           :streamUrl="streamUrls[i]"
           :fullScreen="camera.fullScreen"
           @click="toggleFullScreen(i)"
+          :key="camera.name"
         />
       </div>
     </div>
@@ -64,20 +65,30 @@ export default {
         !document.mozFullScreen &&
         !document.msFullscreenElement
       ) {
-        this.cameras.forEach((camera) => {
-          camera.fullScreen = false;
-          camera.playing = true;
+        this.cameras = this.cameras.map((camera, i) => {
+          return {
+            ...camera,
+            fullScreen: false,
+            playing: true,
+          };
         });
       }
     },
     toggleFullScreen(index) {
-      this.cameras.forEach((camera, i) => {
+      this.cameras = this.cameras.map((camera, i) => {
         if (i === index) {
-          camera.fullScreen = !camera.fullScreen;
+          return {
+            ...camera,
+            fullScreen: !camera.fullScreen,
+            playing: true,
+          };
         } else {
-          camera.fullScreen = false;
+          return {
+            ...camera,
+            fullScreen: false,
+            playing: camera.fullScreen ? false : true,
+          };
         }
-        camera.playing = camera.fullScreen || !this.cameras[index].fullScreen;
       });
     },
   },
